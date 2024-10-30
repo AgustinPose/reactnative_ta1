@@ -5,9 +5,9 @@ import thirdImage from '../../images/ig3.jpg';
 import { FlatList, Image, Text, View, StyleSheet, Button } from 'react-native';
 
 const galleryImages = [
-  { id: '1', source: firstImage, caption: 'Beautiful landscape view' },
-  { id: '2', source: secondImage, caption: 'Urban architecture' },
-  { id: '3', source: thirdImage, caption: 'Nature closeup' },
+  { id: '1', source: firstImage, caption: 'Hermosa vista' },
+  { id: '2', source: secondImage, caption: 'Flores Amarillas lalala' },
+  { id: '3', source: thirdImage, caption: 'Distorcion' },
 ];
 
 export default function GalleryScreen() {
@@ -24,7 +24,7 @@ export default function GalleryScreen() {
         {galleryImages[activeImageIndex].caption}
       </Text>
       <Button 
-        title="Next Image" 
+        title="Proxima Imagen" 
         onPress={navigateToNextImage} 
       />
     </View>
