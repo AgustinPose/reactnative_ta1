@@ -1,34 +1,43 @@
 import React, { useState } from 'react';
-import ig1 from '../../images/ig1.jpg';
-import ig2 from '../../images/ig2.jpeg';
-import ig3 from '../../images/ig3.jpg';
+import firstImage from '../../images/ig1.jpg';
+import secondImage from '../../images/ig2.jpeg';
+import thirdImage from '../../images/ig3.jpg';
 import { FlatList, Image, Text, View, StyleSheet, Button } from 'react-native';
 
-const images = [
-  { id: '1', src: ig1, description: 'Descripción de la imagen 1' },
-  { id: '2', src: ig2, description: 'Descripción de la imagen 2' },
-  { id: '3', src: ig3, description: 'Descripción de la imagen 3' },
+const galleryImages = [
+  { id: '1', source: firstImage, caption: 'Beautiful landscape view' },
+  { id: '2', source: secondImage, caption: 'Urban architecture' },
+  { id: '3', source: thirdImage, caption: 'Nature closeup' },
 ];
 
-export default function ExploreScreen() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+export default function GalleryScreen() {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const renderItem = ({ item }) => (
+  const renderGalleryItem = ({ item }) => (
     <View style={styles.imageContainer}>
-      <Image source={images[currentImageIndex].src} style={styles.image} resizeMode="cover" />
-      <Text style={styles.description}>{images[currentImageIndex].description}</Text>
-      <Button title="Cambiar Imagen" onPress={changeImage} />
+      <Image 
+        source={galleryImages[activeImageIndex].source} 
+        style={styles.image} 
+        resizeMode="cover" 
+      />
+      <Text style={styles.description}>
+        {galleryImages[activeImageIndex].caption}
+      </Text>
+      <Button 
+        title="Next Image" 
+        onPress={navigateToNextImage} 
+      />
     </View>
   );
 
-  const changeImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  const navigateToNextImage = () => {
+    setActiveImageIndex((current) => (current + 1) % galleryImages.length);
   };
 
   return (
     <FlatList
-      data={[images[currentImageIndex]]}
-      renderItem={renderItem}
+      data={[galleryImages[activeImageIndex]]}
+      renderItem={renderGalleryItem}
       keyExtractor={(item) => item.id}
       contentContainerStyle={styles.gallery}
     />
